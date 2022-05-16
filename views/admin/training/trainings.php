@@ -27,7 +27,7 @@ $deleted = can_action('101', 'deleted');
                 </div>
                 <?php } ?>
                 <h4 class="card-title mb-3"> <?= lang('training') . ' ' . lang('list') ?></h4>
-                <table class="table table-striped dt-responsive nowrap w-100" id="list_training_datatable">
+                <table class="table table-striped dt-responsive nowrap w-100" id="contentTable">
                     <thead>
                         <tr>
                             <?php super_admin_opt_th() ?>
@@ -36,7 +36,7 @@ $deleted = can_action('101', 'deleted');
                             <th><?= lang('vendor') ?></th>
                             <th><?= lang('start_date') ?></th>
                             <th><?= lang('finish_date') ?></th>
-                            <?php $show_custom_fields = custom_form_table(15, null);
+                            <?php /* $show_custom_fields = custom_form_table(15, null);
                             if (!empty($show_custom_fields)) {
                                 foreach ($show_custom_fields as $c_label => $v_fields) {
                                     if (!empty($c_label)) {
@@ -44,13 +44,13 @@ $deleted = can_action('101', 'deleted');
                                         <th><?= $c_label ?> </th>
                                     <?php }
                                 }
-                            }
+                            } */
                             ?>
                             <th><?= lang('status') ?></th>
                             <th><?= lang('action') ?></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <?php /* ?><tbody>
                         <?php if (!empty($all_training_info)):foreach ($all_training_info as $key => $v_training):
                             $profile_info = $this->db->where('user_id', $v_training->user_id)->get('tbl_account_details')->row();
                             $can_edit = $this->training_model->can_action('tbl_training', 'edit', array('training_id' => $v_training->training_id));
@@ -109,9 +109,40 @@ $deleted = can_action('101', 'deleted');
                             </tr>
                         <?php endforeach; ?>
                         <?php endif; ?>
-                    </tbody>
+                    </tbody><?php */ ?>
                 </table>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Script -->
+ <script type="text/javascript">
+     $(document).ready(function(){
+        $('#contentTable').DataTable({
+          'processing': true,
+          'serverSide': true,
+          'serverMethod': 'post',
+          'ajax': {
+             'url':'<?=base_url()?>admin/datatable/training'
+          },
+          'fnRowCallback': function( nRow, aData, iDisplayIndex ) {
+            $(nRow).attr("id", "table_deposit_"+iDisplayIndex);
+            return nRow;
+          },
+          'columns': [
+		  <?php if (is_company_column_ag()) { ?>
+             { data: 'companies_id' },
+		  <?php } ?>
+             { data: 'name' },
+             { data: 'training_name' },
+             { data: 'vendor_name' },
+             { data: 'start_date' },
+             { data: 'finish_date' },
+             // { data: 'label' },
+             { data: 'status' },
+             { data: 'action' },
+          ]
+        });
+     });
+ </script>

@@ -23,7 +23,7 @@ $deleted = can_action('150', 'deleted');
             <div class="card-body">
                 <h4 class="card-title mb-4"><?= lang('all_payments') ?></h4>
                 <div class="table-responsive">
-                    <table class="table table-striped dt-responsive nowrap w-100" id="list_all_payments_datatable">
+                    <table class="table table-striped dt-responsive nowrap w-100" id="contentTable">
                         <thead>
                         <tr>
                             <th><?= lang('payment_date') ?></th>
@@ -37,7 +37,7 @@ $deleted = can_action('150', 'deleted');
                             <?php } ?>
                         </tr>
                         </thead>
-                        <tbody>
+                        <?php /* ?><tbody>
                         <?php
                         if (!empty($all_purchase)) {
                             foreach ($all_purchase as $v_purchase) {
@@ -98,10 +98,37 @@ $deleted = can_action('150', 'deleted');
                             }
                         }
                         ?>
-                        </tbody>
+                        </tbody><?php */ ?>
                     </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Script -->
+ <script type="text/javascript">
+     $(document).ready(function(){
+        $('#contentTable').DataTable({
+          'processing': true,
+          'serverSide': true,
+          'serverMethod': 'post',
+          'ajax': {
+             'url':'<?=base_url()?>admin/datatable/purchase_all_payments'
+          },
+          'fnRowCallback': function( nRow, aData, iDisplayIndex ) {
+            $(nRow).attr("id", "table_payments_"+iDisplayIndex);
+            return nRow;
+          },
+          'columns': [         
+             { data: 'payment_date' },
+             { data: 'purchase_date' },
+             { data: 'purchase' },
+             { data: 'supplier' },
+             { data: 'amount' },
+             { data: 'payment_method' },
+             { data: 'action' },
+          ]
+        });
+     });
+ </script>

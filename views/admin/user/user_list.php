@@ -33,7 +33,7 @@ $deleted = can_action('24', 'deleted');
                     <div class="tab-pane <?= $active == 1 ? 'active' : '' ?>" id="manage">
                         <h4 class="card-title mb-4"><?= lang('all_users') ?></h4>
                         <div class="table-responsive">
-                            <table class="table table-striped dt-responsive nowrap w-100" id="list_users_datatable">
+                            <table class="table table-striped dt-responsive nowrap w-100" id="contentTable">
                                 <thead>
                                     <tr>
                                         <?php super_admin_opt_th() ?>
@@ -42,7 +42,7 @@ $deleted = can_action('24', 'deleted');
                                         <th class="col-sm-2"><?= lang('username') ?></th>
                                         <th class="col-sm-1"><?= lang('active') ?></th>
                                         <th class="col-sm-1"><?= lang('user_type') ?></th>
-                                        <?php $show_custom_fields = custom_form_table(13, null);
+                                        <?php /* $show_custom_fields = custom_form_table(13, null);
                                         if (!empty($show_custom_fields)) {
                                             foreach ($show_custom_fields as $c_label => $v_fields) {
                                                 if (!empty($c_label)) {
@@ -50,13 +50,13 @@ $deleted = can_action('24', 'deleted');
                                                     <th><?= $c_label ?> </th>
                                                 <?php }
                                             }
-                                        }
+                                        } */
                                         ?>
                                         <th class="col-sm-2"><?= lang('action') ?></th>
 
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <?php /* ?><tbody>
                                 <?php
                                 if (!empty($all_user_info)): foreach ($all_user_info as $v_user) :
                                     $account_info = $this->user_model->check_by(array('user_id' => $v_user->user_id), 'tbl_account_details');
@@ -164,7 +164,7 @@ $deleted = can_action('24', 'deleted');
                                 endforeach;
                                     ?>
                                 <?php endif; ?>
-                                </tbody>
+                                </tbody><?php */ ?>
                             </table>
                         </div>
                     </div>
@@ -899,3 +899,33 @@ if (!empty($login_info) && $login_info->role_id == 2) { ?>
     </script>
 <?php }
 ?>
+
+<!-- Script -->
+ <script type="text/javascript">
+     $(document).ready(function(){
+        $('#contentTable').DataTable({
+          'processing': true,
+          'serverSide': true,
+          'serverMethod': 'post',
+          'ajax': {
+             'url':'<?=base_url()?>admin/datatable/user_list'
+          },
+          'fnRowCallback': function( nRow, aData, iDisplayIndex ) {
+            $(nRow).attr("id", "table_ticket_"+iDisplayIndex);
+            return nRow;
+          },
+          'columns': [
+		  <?php if (is_company_column_ag()) { ?>
+             { data: 'companies_id' },
+		  <?php } ?>
+             { data: 'photo' },
+             { data: 'fullname' },
+             { data: 'username' },
+             { data: 'active' },
+             { data: 'user_type' },
+             // { data: 'label' },
+             { data: 'action' },
+          ]
+        });
+     });
+ </script>

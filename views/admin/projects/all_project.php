@@ -269,7 +269,7 @@ $deleted = can_action('57', 'deleted');
                         <h4 class="card-title mb-3"><?php if($tab=='projects'){ ?><?=lang('all'). '  ' .lang($tab) ?> <?php } else{ ?><?=lang($tab). '  ' .lang('projects') ?><?php } ?></h4>
                        
                         <div class="table-responsive">
-                            <table class="table table-striped dt-responsive nowrap w-100" id="list_project_datatable">
+                            <table class="table table-striped dt-responsive nowrap w-100" id="contentTable">
                                 <thead>
                                 <tr>
                                     <th width="20"><?= lang('project_name') ?></th>
@@ -278,7 +278,7 @@ $deleted = can_action('57', 'deleted');
                                     <th class="col-sm-1"><?= lang('end_date') ?></th>
                                     <th class="col-sm-1"><?= lang('assigned_to') ?></th>
                                     <th class="col-sm-1"><?= lang('status') ?></th>
-                                    <?php $show_custom_fields = custom_form_table(4, null);
+                                    <?php /* $show_custom_fields = custom_form_table(4, null);
                                     if (!empty($show_custom_fields)) {
                                         foreach ($show_custom_fields as $c_label => $v_fields) {
                                             if (!empty($c_label)) {
@@ -286,12 +286,12 @@ $deleted = can_action('57', 'deleted');
                                                 <th><?= $c_label ?> </th>
                                             <?php }
                                         }
-                                    }
+                                    } */
                                     ?>
                                     <th class="col-options no-sort"><?= lang('action') ?></th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <?php /* ?><tbody>
                                 <?php
                                 if (!empty($all_project_info)):foreach ($all_project_info as $v_project):
                                     $progress = $this->items_model->get_project_progress($v_project->project_id);
@@ -436,7 +436,7 @@ $deleted = can_action('57', 'deleted');
                                 endforeach;
                                 endif;
                                 ?>
-                                </tbody>
+                                </tbody><?php */ ?>
                             </table>
                         </div>   
                     </div>
@@ -510,3 +510,33 @@ $deleted = can_action('57', 'deleted');
     });
 
 </script>
+
+<!-- Script -->
+ <script type="text/javascript">
+     $(document).ready(function(){
+        $('#contentTable').DataTable({
+          'processing': true,
+          'serverSide': true,
+          'serverMethod': 'post',
+          'ajax': {
+             'url':'<?=base_url()?>admin/datatable/projects?filter=<?=@$filterBy;?>'
+          },
+          'fnRowCallback': function( nRow, aData, iDisplayIndex ) {
+            $(nRow).attr("id", "table-project-"+iDisplayIndex);
+            return nRow;
+          },
+          'columns': [
+             { data: 'project_name' },
+			 <?php if (is_company_column_ag()) { ?>
+             { data: 'companies' },
+			 <?php } ?>
+             { data: 'client' },
+             { data: 'end_date' },
+             { data: 'assigned_to' },
+             { data: 'status' },
+             // { data: 'label' },
+             { data: 'action' },
+          ]
+        });
+     });
+ </script>

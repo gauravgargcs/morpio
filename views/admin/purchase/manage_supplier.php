@@ -43,7 +43,7 @@ if (!empty($supplier_info)) {
                     <div class="tab-pane <?= $active == 1 ? 'active' : ''; ?>" id="manage">
                         <h4 class="card-title mb-4"><?= lang('manage') . ' ' . lang('supplier') ?></h4>
                         <div class="table-responsive">
-                            <table class="table table-striped dt-responsive nowrap w-100" id="list_supplier_datatable">
+                            <table class="table table-striped dt-responsive nowrap w-100" id="contentTable">
                                 <thead>
                                     <tr>
                                         <?php super_admin_opt_th() ?>
@@ -56,7 +56,7 @@ if (!empty($supplier_info)) {
                                         <?php } ?>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <?php /* ?><tbody>
                                     <?php
                                     if (!empty($all_supplier)) {
                                         foreach ($all_supplier as $v_supplier) {
@@ -83,7 +83,7 @@ if (!empty($supplier_info)) {
                                         };
                                     }
                                     ?>
-                                </tbody>
+                                </tbody><?php */ ?>
                             </table>
                         </div>
                     </div>
@@ -352,3 +352,31 @@ if (!empty($supplier_info)) {
         </div>
     </div>
 </div>
+
+<!-- Script -->
+ <script type="text/javascript">
+     $(document).ready(function(){
+        $('#contentTable').DataTable({
+          'processing': true,
+          'serverSide': true,
+          'serverMethod': 'post',
+          'ajax': {
+             'url':'<?=base_url()?>admin/datatable/purchase_supplier'
+          },
+          'fnRowCallback': function( nRow, aData, iDisplayIndex ) {
+            $(nRow).attr("id", "table_supplier_"+iDisplayIndex);
+            return nRow;
+          },
+          'columns': [
+             <?php if (is_company_column_ag()) { ?>
+                { data: 'companies_id' },
+             <?php } ?>             
+             { data: 'name' },
+             { data: 'address' },
+             { data: 'email' },
+             { data: 'phone' },
+             { data: 'action' },
+          ]
+        });
+     });
+ </script>

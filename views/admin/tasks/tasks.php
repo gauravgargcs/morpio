@@ -290,7 +290,7 @@ if ($tasks == 'kanban') {
                             <?php } ?>
                             <div class="table-responsive">
 
-                            <table class="table table-striped dt-responsive nowrap w-100" id="list_tasks_datatable">
+                            <table class="table table-striped dt-responsive nowrap w-100" id="contentTable">
                                 <thead>
                                 <tr>
                                     <th data-check-all>
@@ -307,7 +307,7 @@ if ($tasks == 'kanban') {
                                     <th class="col-sm-1"><?= lang('status') ?></th>
                                     <th class="col-sm-1"><?= lang('progress') ?></th>
                                     <th class="col-sm-2"><?= lang('assigned_to') ?></th>
-                                    <?php $show_custom_fields = custom_form_table(3, null);
+                                    <?php /* $show_custom_fields = custom_form_table(3, null);
                                     if (!empty($show_custom_fields)) {
                                         foreach ($show_custom_fields as $c_label => $v_fields) {
                                             if (!empty($c_label)) {
@@ -315,13 +315,13 @@ if ($tasks == 'kanban') {
                                                 <th><?= $c_label ?> </th>
                                             <?php }
                                         }
-                                    }
+                                    } */
                                     ?>
                                     <th class="col-sm-3"><?= lang('changes/view') ?></th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <?php
+                                <?php /* ?><tbody>
+                                <?php 
                                 if (!empty($all_task_info)):foreach ($all_task_info as $key => $v_task):
                                     if ($v_task->task_status != 6 || !empty($completed)) {
                                     $task_status=$v_task->task_status;
@@ -493,7 +493,7 @@ if ($tasks == 'kanban') {
                                     }
                                 endforeach; ?>
                                 <?php endif; ?>
-                                </tbody>
+                                </tbody><?php */ ?>
                             </table>
                             </div>
                         </div>                    
@@ -560,3 +560,34 @@ if ($tasks == 'kanban') {
        });
     });
 </script>
+
+<!-- Script -->
+ <script type="text/javascript">
+     $(document).ready(function(){
+        $('#contentTable').DataTable({
+          'processing': true,
+          'serverSide': true,
+          'serverMethod': 'post',
+          'ajax': {
+             'url':'<?=base_url()?>admin/datatable/all_task?filter=<?=$filterBy;?>'
+          },
+          'fnRowCallback': function( nRow, aData, iDisplayIndex ) {
+            $(nRow).attr("id", "table-tasks-"+iDisplayIndex);
+            return nRow;
+          },
+          'columns': [
+             { data: 'checkbox' },
+             { data: 'task_name' },
+			 <?php if (is_company_column_ag()) { ?>
+             { data: 'companies' },
+			 <?php } ?>
+             { data: 'due_date' },
+             { data: 'status' },
+             { data: 'progress' },
+             { data: 'assigned_to' },
+             // { data: 'label' },
+             { data: 'action' },
+          ]
+        });
+     });
+ </script>

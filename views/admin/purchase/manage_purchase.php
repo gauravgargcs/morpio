@@ -44,7 +44,7 @@ if (!empty($purchase_info)) {
                     <div class="tab-pane <?= $active == 1 ? 'active' : ''; ?>" id="manage">
                         <h4 class="card-title mb-4"><?= lang('manage_account') ?></h4>
                         <!-- <div class="table-responsive"> -->
-                            <table class="table table-striped dt-responsive nowrap w-100" id="list_manage_purchase_datatable">
+                            <table class="table table-striped dt-responsive nowrap w-100" id="contentTable">
                                 <thead>
                                 <tr>
                                     <?php super_admin_opt_th() ?>
@@ -58,7 +58,7 @@ if (!empty($purchase_info)) {
                                     <?php } ?>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <?php /* ?><tbody>
                                 <?php
                                 if (!empty($all_purchases)) {
                                     foreach ($all_purchases as $v_purchase) {
@@ -116,7 +116,7 @@ if (!empty($purchase_info)) {
                                     };
                                 }
                                 ?>
-                                </tbody>
+                                </tbody><?php */ ?>
                             </table>
                         <!-- </div> -->
                     </div>
@@ -911,3 +911,32 @@ if (isset($purchase_info)) {
     });
 </script>
 <?php include_once 'assets/js/purchase.php'; ?>
+
+<!-- Script -->
+ <script type="text/javascript">
+     $(document).ready(function(){
+        $('#contentTable').DataTable({
+          'processing': true,
+          'serverSide': true,
+          'serverMethod': 'post',
+          'ajax': {
+             'url':'<?=base_url()?>admin/datatable/manage_purchase'
+          },
+          'fnRowCallback': function( nRow, aData, iDisplayIndex ) {
+            $(nRow).attr("id", "table_purchase_"+iDisplayIndex);
+            return nRow;
+          },
+          'columns': [
+             <?php if (is_company_column_ag()) { ?>
+                { data: 'companies_id' },
+             <?php } ?>             
+             { data: 'reference_no' },
+             { data: 'supplier' },
+             { data: 'purchase_date' },
+             { data: 'due_amount' },
+             { data: 'status' },
+             { data: 'action' },
+          ]
+        });
+     });
+ </script>

@@ -151,7 +151,7 @@ if ($text == 'kanban') {
 
                         <h4 class="card-title mb-4"><?= lang('all_leads') ?></h4>
                         <div class="table-responsive">
-                            <table class="table table-striped nowrap w-100" id="list_leads_datatable">
+                            <table class="table table-striped nowrap w-100" id="contentTable">
                                 <thead>
                                 <tr>
                                     <th data-check-all>
@@ -171,7 +171,7 @@ if ($text == 'kanban') {
                                     <th><?= lang('lead_source') ?></th>
                                     <th class="col-sm-2"><?= lang('assigned_to') ?></th>
                                     <th class=""><?= lang('assigned_users_list'); ?></th>
-                                    <?php $show_custom_fields = custom_form_table(5, null);
+                                    <?php /* $show_custom_fields = custom_form_table(5, null);
                                     if (!empty($show_custom_fields)) {
                                         foreach ($show_custom_fields as $c_label => $v_fields) {
                                             if (!empty($c_label)) {
@@ -180,11 +180,11 @@ if ($text == 'kanban') {
                                             <?php }
                                         }
                                     }
-                                    ?>
+                                    */ ?>
                                     <th class="col-options no-sort"><?= lang('action') ?></th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <?php /* ?><tbody>
                                 <?php
                                  $all_field = get_result('tbl_custom_field', array('form_id' => 5));
                                 $table = get_row('tbl_form', array('form_id' => 5), 'tbl_name');
@@ -356,7 +356,7 @@ if ($text == 'kanban') {
                                 endforeach;
                                 endif;
                                 ?>
-                                </tbody>
+                                </tbody><?php */ ?>
                             </table>
                         </div>
                     </div>
@@ -819,3 +819,36 @@ if ($text == 'kanban') {
 
    
 </script>
+
+<!-- Script -->
+ <script type="text/javascript">
+     $(document).ready(function(){
+        $('#contentTable').DataTable({
+          'processing': true,
+          'serverSide': true,
+          'serverMethod': 'post',
+          'ajax': {
+             'url':'<?=base_url()?>admin/datatable/leads?filter=<?=@$filterBy;?>'
+          },
+          'fnRowCallback': function( nRow, aData, iDisplayIndex ) {
+            $(nRow).attr("id", "leads_"+iDisplayIndex);
+            return nRow;
+          },
+          'columns': [
+             { data: 'checkbox' },
+             { data: 'contact_name' },
+			 <?php if (is_company_column_ag()) { ?>
+             { data: 'companies' },
+			 <?php } ?>
+             { data: 'email' },
+             { data: 'phone' },
+             { data: 'lead_status' },
+             { data: 'lead_source' },
+             { data: 'assigned_to' },
+             { data: 'assigned_users_list' },
+             // { data: 'label' },
+             { data: 'action' },
+          ]
+        });
+     });
+ </script>

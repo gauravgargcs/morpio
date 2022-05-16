@@ -55,6 +55,7 @@ class projects extends Admin_Controller
             $data['tab'] = 'projects';
         }
         $data['all_project_info'] = $this->items_model->get_all_project($this->uri->segment(4));
+		$data['filterBy'] = $id;
         // var_dump($data['all_project_info']); die;
         $data['subview'] = $this->load->view('admin/projects/all_project', $data, TRUE);
         $this->load->view('admin/_layout_skote_main', $data); //page load

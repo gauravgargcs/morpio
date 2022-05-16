@@ -1246,6 +1246,19 @@ function super_admin_opt_th()
     }
 }
 
+//code by cloud1 start
+function is_company_column_ag()
+{
+    $CI = &get_instance();
+    $super_admin = $CI->session->userdata('super_admin');
+    if (!empty($super_admin) && $super_admin == 'Yes' || !empty($super_admin) && $super_admin == 'owner') {
+        return true;
+    } else {
+        return false;
+    }
+}
+//code by cloud1 end
+
 function super_admin_opt_td($companies_id = null, $t = null)
 {
     $CI = &get_instance();

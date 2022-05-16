@@ -511,7 +511,7 @@ $deleted = can_action('13', 'deleted');
                         <!-- ************** general *************-->
                         <div class="tab-pane <?= $active == 1 ? 'active' : ''; ?>" id="manage">
                             <h3 class="card-title mb-4"><strong><?= lang('all_invoices') ?></strong></h3>
-                                <table class="table table-striped dt-responsive nowrap w-100" id="invoice_manage_datatable">
+                                <table class="table table-striped dt-responsive nowrap w-100" id="contentTable">
                                     <thead>
                                     <tr>
                                         <?php super_admin_opt_th() ?>
@@ -521,7 +521,7 @@ $deleted = can_action('13', 'deleted');
                                         <th><?= lang('client_name') ?></th>
                                         <th class="col-currency"><?= lang('due_amount') ?></th>
                                         <th><?= lang('status') ?></th>
-                                        <?php $show_custom_fields = custom_form_table(9, null);
+                                        <?php /* $show_custom_fields = custom_form_table(9, null);
                                         if (!empty($show_custom_fields)) {
                                             foreach ($show_custom_fields as $c_label => $v_fields) {
                                                 if (!empty($c_label)) {
@@ -529,14 +529,14 @@ $deleted = can_action('13', 'deleted');
                                                     <th><?= $c_label ?> </th>
                                                 <?php }
                                             }
-                                        }
+                                        } */
                                         ?>
                                         <?php if (!empty($edited) || !empty($deleted)) { ?>
                                             <th class="hidden-print"><?= lang('action') ?></th>
                                         <?php } ?>
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                    <?php /* ?><tbody>
                                     <?php
                                     if (!empty($all_invoices_info)) {
                                         $all_invoices_info = array_reverse($all_invoices_info);
@@ -653,7 +653,7 @@ $deleted = can_action('13', 'deleted');
                                         }
                                     }
                                     ?>
-                                    </tbody>
+                                    </tbody><?php */ ?>
                                 </table>
                         </div>
                         <?php if (!empty($created) || !empty($edited)) { ?>
@@ -1529,3 +1529,34 @@ if (isset($invoice_info)) {
     });
 </script>
 <?php include_once 'skote_assets/js/invoice.php'; ?>
+
+<!-- Script -->
+ <script type="text/javascript">
+     $(document).ready(function(){
+        $('#contentTable').DataTable({
+          'processing': true,
+          'serverSide': true,
+          'serverMethod': 'post',
+          'ajax': {
+             'url':'<?=base_url()?>admin/datatable/manage_invoice?filter=<?=@$filterBy;?>'
+          },
+          'fnRowCallback': function( nRow, aData, iDisplayIndex ) {
+            $(nRow).attr("id", "invoice_table_"+iDisplayIndex);
+            return nRow;
+          },
+          'columns': [
+		  <?php if (is_company_column_ag()) { ?>
+             { data: 'companies' },
+		  <?php } ?>
+             { data: 'invoice' },
+             { data: 'invoice_date' },
+             { data: 'due_date' },
+             { data: 'client_name' },
+             { data: 'due_amount' },
+             { data: 'status' },
+             // { data: 'label' },
+             { data: 'action' },
+          ]
+        });
+     });
+ </script>

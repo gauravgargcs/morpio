@@ -36,7 +36,7 @@ $deleted = can_action('155', 'deleted');
                     <div class="tab-pane <?= $active == 1 ? 'active' : ''; ?>" id="manage">
                         <h4 class="card-title mb-4"><?= lang('damage_items')  ?></h4>
                         <div class="table-responsive">
-                            <table class="table table-striped dt-responsive nowrap w-100" id="list_daamage_items_datatable">
+                            <table class="table table-striped dt-responsive nowrap w-100" id="contentTable">
                                 <thead>
                                     <tr>
                                         <?php super_admin_opt_th() ?>
@@ -50,7 +50,7 @@ $deleted = can_action('155', 'deleted');
                                         <?php } ?>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <?php /* ?><tbody>
                                 <?php
                                 $all_damage_product = get_result('tbl_damage_product');
                                 foreach ($all_damage_product as $v_damage_product):
@@ -95,7 +95,7 @@ $deleted = can_action('155', 'deleted');
                                     }
                                 endforeach;
                                 ?>
-                                </tbody>
+                                </tbody><?php */ ?>
                             </table>
                         </div>
                     </div>
@@ -217,3 +217,32 @@ $deleted = can_action('155', 'deleted');
         </div>
     </div>
 </div>
+
+<!-- Script -->
+ <script type="text/javascript">
+     $(document).ready(function(){
+        $('#contentTable').DataTable({
+          'processing': true,
+          'serverSide': true,
+          'serverMethod': 'post',
+          'ajax': {
+             'url':'<?=base_url()?>admin/datatable/damage_items'
+          },
+          'fnRowCallback': function( nRow, aData, iDisplayIndex ) {
+            $(nRow).attr("id", "table_items_"+iDisplayIndex);
+            return nRow;
+          },
+          'columns': [
+             <?php if (is_company_column_ag()) { ?>
+                { data: 'companies_id' },
+             <?php } ?>             
+             { data: 'image' },
+             { data: 'name' },
+             { data: 'decrease_from_stock' },
+             { data: 'notes' },
+             { data: 'date' },
+             { data: 'action' },
+          ]
+        });
+     });
+ </script>

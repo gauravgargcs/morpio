@@ -334,7 +334,7 @@ $deleted = can_action('4', 'deleted');
                         </div>
 
                         <div class="table-responsive">
-                            <table class="table table-striped w-100" style="table-layout: auto;" id="manage_client_datatable">
+                            <table class="table table-striped w-100" style="table-layout: auto;" id="contentTable">
                                 <thead>
                                 <tr>
                                     <th data-check-all>
@@ -358,7 +358,7 @@ $deleted = can_action('4', 'deleted');
                                     <th class="col-sm-1"><?= lang('source') ?> </th>
                                     <th class="col-sm-2"><?= lang('assigned_to') ?></th>
                                     <th class=""><?= lang('assigned_users_list'); ?></th>
-                                    <?php $show_custom_fields = custom_form_table(12, null);
+                                    <?php /* $show_custom_fields = custom_form_table(12, null);
                                     if (!empty($show_custom_fields)) {
                                         foreach ($show_custom_fields as $c_label => $v_fields) {
                                             if (!empty($c_label)) {
@@ -366,12 +366,12 @@ $deleted = can_action('4', 'deleted');
                                                 <th><?= $c_label ?> </th>
                                             <?php }
                                         }
-                                    }
+                                    } */
                                     ?>
                                     <th class="hidden-print col-sm-1"><?= lang('action') ?></th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <?php /* ?><tbody>
                                     <?php
                                     if (!empty($all_client_info)) {
                                     foreach ($all_client_info as $client_details) {
@@ -564,7 +564,7 @@ $deleted = can_action('4', 'deleted');
                                         </tr>
                                         <?php
                                     } } ?>
-                                </tbody>
+                                </tbody><?php */ ?>
                             </table>
                         </div>
                     </div>
@@ -1392,3 +1392,41 @@ $deleted = can_action('4', 'deleted');
         margin-top: .25rem!important;
     }*/
 </style>
+
+<!-- Script -->
+ <script type="text/javascript">
+     $(document).ready(function(){
+        $('#contentTable').DataTable({
+          'processing': true,
+          'serverSide': true,
+          'serverMethod': 'post',
+          'ajax': {
+             'url':'<?=base_url()?>admin/datatable/manage_client?filter=<?=@$filterBy;?>'
+          },
+          'fnRowCallback': function( nRow, aData, iDisplayIndex ) {
+            $(nRow).attr("id", "leads_"+iDisplayIndex);
+            return nRow;
+          },
+          'columns': [
+             { data: 'checkbox' },
+             { data: 'name' },
+			 <?php if (is_company_column_ag()) { ?>
+             { data: 'companies' },
+			 <?php } ?>
+             { data: 'contacts' },
+             { data: 'primary_contact' },
+             { data: 'projects' },
+             { data: 'due_amount' },
+             { data: 'received_amount' },
+             { data: 'expense' },
+             { data: 'group' },
+             { data: 'status' },
+             { data: 'source' },
+             { data: 'assigned_to' },
+             { data: 'assigned_users_list' },
+             // { data: 'label' },
+             { data: 'action' },
+          ]
+        });
+     });
+ </script>

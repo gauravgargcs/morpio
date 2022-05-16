@@ -143,7 +143,7 @@ $uri_segment = $this->uri->segment(4);
                     <div class="tab-pane <?= $active == 1 || $active == $ticket_status ? 'active' : '' ?>" id="manage">
                         <h4 class="card-title mb-4"><?php if(!empty($uri_segment)){ echo strtoupper($uri_segment); }else{ echo lang('all'); } ?> <?=lang('tickets') ?></h4>
                         <!-- <div class="table-responsive"> -->
-                            <table class="table table-striped dt-responsive nowrap w-100" id="tickets_list_dtble">
+                            <table class="table table-striped dt-responsive nowrap w-100" id="contentTable">
                                 <thead>
                                     <tr>
                                         <?php super_admin_opt_th() ?>
@@ -155,7 +155,7 @@ $uri_segment = $this->uri->segment(4);
                                         <?php } ?>
                                         <th><?= lang('department') ?></th>
                                         <th><?= lang('status') ?></th>
-                                        <?php $show_custom_fields = custom_form_table(7, null);
+                                        <?php /* $show_custom_fields = custom_form_table(7, null);
                                         if (!empty($show_custom_fields)) {
                                             foreach ($show_custom_fields as $c_label => $v_fields) {
                                                 if (!empty($c_label)) {
@@ -163,13 +163,13 @@ $uri_segment = $this->uri->segment(4);
                                                     <th><?= $c_label ?> </th>
                                         <?php }
                                             }
-                                        }
+                                        } */
                                         ?>
 
                                         <th><?= lang('action') ?></th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <?php /* ?><tbody>
                                     <?php
                                     if (!empty($all_tickets_info)) {
                                         foreach ($all_tickets_info as $v_tickets_info) {
@@ -337,7 +337,7 @@ $uri_segment = $this->uri->segment(4);
                                         }
                                     }
                                     ?>
-                                </tbody>
+                                </tbody><?php */ ?>
                             </table>
                         <!-- </div> -->
                     </div>
@@ -876,3 +876,36 @@ $(document).ready(function(){
 });
 
 </script>
+
+<!-- Script -->
+ <script type="text/javascript">
+     $(document).ready(function(){
+        $('#contentTable').DataTable({
+          'processing': true,
+          'serverSide': true,
+          'serverMethod': 'post',
+          'ajax': {
+             'url':'<?=base_url()?>admin/datatable/tickets?ticket_status=<?php echo $ticket_status; ?>'
+          },
+          'fnRowCallback': function( nRow, aData, iDisplayIndex ) {
+            $(nRow).attr("id", "table_ticket_"+iDisplayIndex);
+            return nRow;
+          },
+          'columns': [
+		  <?php if (is_company_column_ag()) { ?>
+             { data: 'companies_id' },
+		  <?php } ?>
+             { data: 'ticket_code' },
+             { data: 'subject' },
+             { data: 'date' },
+			 <?php if (is_company_column_ag()) { ?>
+             { data: 'reporter' },
+			 <?php } ?>
+             { data: 'department' },
+             { data: 'status' },
+             // { data: 'label' },
+             { data: 'action' },
+          ]
+        });
+     });
+ </script>

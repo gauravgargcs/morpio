@@ -33,7 +33,7 @@ $deleted = can_action('103', 'deleted');
                 <?php } ?>
                 <h4 class="card-title mb-4"><?= lang('job_posted_list') ?></h4>
                 
-                <table class="table table-striped dt-responsive nowrap w-100" id="job_posted_dtable">
+                <table class="table table-striped dt-responsive nowrap w-100" id="contentTable">
 
                     <thead>
                     <tr>
@@ -42,7 +42,7 @@ $deleted = can_action('103', 'deleted');
                         <th><?= lang('designation') ?></th>
                         <th><?= lang('vacancy_no') ?></th>
                         <th><?= lang('last_date') ?></th>
-                        <?php $show_custom_fields = custom_form_table(14, null);
+                        <?php /* $show_custom_fields = custom_form_table(14, null);
                         if (!empty($show_custom_fields)) {
                             foreach ($show_custom_fields as $c_label => $v_fields) {
                                 if (!empty($c_label)) {
@@ -50,13 +50,13 @@ $deleted = can_action('103', 'deleted');
                                     <th><?= $c_label ?> </th>
                                 <?php }
                             }
-                        }
+                        } */
                         ?>
                         <th><?= lang('status') ?></th>
                         <th><?= lang('action') ?></th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <?php /* ?><tbody>
                     <?php if (!empty($job_post_info)): foreach ($job_post_info as $v_job_post):
                         if (!empty($v_job_post->designations_id)) {
                             $design_info = $this->db->where('designations_id', $v_job_post->designations_id)->get('tbl_designations')->row();
@@ -138,9 +138,39 @@ $deleted = can_action('103', 'deleted');
                     endforeach;
                         ?>
                     <?php endif; ?>
-                    </tbody>
+                    </tbody><?php */ ?>
                 </table>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Script -->
+ <script type="text/javascript">
+     $(document).ready(function(){
+        $('#contentTable').DataTable({
+          'processing': true,
+          'serverSide': true,
+          'serverMethod': 'post',
+          'ajax': {
+             'url':'<?=base_url()?>admin/datatable/jobs_posted'
+          },
+          'fnRowCallback': function( nRow, aData, iDisplayIndex ) {
+            $(nRow).attr("id", "table_deposit_"+iDisplayIndex);
+            return nRow;
+          },
+          'columns': [
+		  <?php if (is_company_column_ag()) { ?>
+             { data: 'companies_id' },
+		  <?php } ?>
+             { data: 'job_title' },
+             { data: 'designation' },
+             { data: 'vacancy_no' },
+             { data: 'last_date' },
+             // { data: 'label' },
+             { data: 'status' },
+             { data: 'action' },
+          ]
+        });
+     });
+ </script>

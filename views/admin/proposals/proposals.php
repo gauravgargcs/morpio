@@ -318,9 +318,9 @@ if (!empty($type) && !is_numeric($type)) {
             <div class="row">
                 <div class="col-xl-12">
                     <!-- Tabs within a box -->
-                    <div class="tab-pane <?= $active == 1 ? 'active' : ''; ?>" id="contentTable">
+                    <div class="tab-pane <?= $active == 1 ? 'active' : ''; ?>" id="contentTables">
                         <h3 class="card-title mb-4"><strong><?= lang('all_proposals') ?></strong></h3>
-                        <table class="table table-striped dt-responsive nowrap w-100" id="all_proposals_manage_datatable">
+                        <table class="table table-striped dt-responsive nowrap w-100" id="contentTable">
                             <thead>
                                 <tr>
                                     <?php super_admin_opt_th() ?>
@@ -330,7 +330,7 @@ if (!empty($type) && !is_numeric($type)) {
                                     <th><?= strtoupper(lang('TO')) ?></th>
                                     <th><?= lang('amount') ?></th>
                                     <th><?= lang('status') ?></th>
-                                    <?php $show_custom_fields = custom_form_table(11, null);
+                                    <?php /* $show_custom_fields = custom_form_table(11, null);
                                     if (!empty($show_custom_fields)) {
                                         foreach ($show_custom_fields as $c_label => $v_fields) {
                                             if (!empty($c_label)) {
@@ -339,13 +339,13 @@ if (!empty($type) && !is_numeric($type)) {
                                             <?php }
                                         }
                                     }
-                                    ?>
+                                    */ ?>
                                     <?php if (!empty($edited) || !empty($deleted)) { ?>
                                         <th class="hidden-print"><?= lang('action') ?></th>
                                     <?php } ?>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <?php /* ?><tbody>
                                 <?php
 
                                 if (!empty($all_proposals_info)) {
@@ -469,7 +469,7 @@ if (!empty($type) && !is_numeric($type)) {
                                     }
                                 }
                                 ?>
-                            </tbody>
+                            </tbody><?php */ ?>
                         </table>
                     </div>
                 </div>
@@ -543,15 +543,17 @@ if (isset($proposals_info)) {
             return nRow;
           },
           'columns': [
-             { data: 'subscriptions_id' },
-             { data: 'plan_name' },
-             { data: 'domain' },
-             { data: 'industry_type' },
-             { data: 'trial_period' },
-             { data: 'currency' },
-             { data: 'frequency' },
+		  <?php if (is_company_column_ag()) { ?>
+				{ data: 'companies' },
+			<?php } ?>
+             
+             { data: 'proposal' },
+             { data: 'proposal_date' },
+             { data: 'expire_date' },
+             { data: 'to' },
+             { data: 'amount' },
              { data: 'status' },
-             { data: 'date' },
+             // { data: 'label' },
              { data: 'action' },
           ]
         });

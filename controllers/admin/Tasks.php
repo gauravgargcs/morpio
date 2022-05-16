@@ -68,7 +68,9 @@ class Tasks extends Admin_Controller
         $data['logged_user_role']=$this->session->userdata('user_type');
         $data['all_task_info'] = $this->tasks_model->get_tasks($filterBy);
         $data['all_task_kanban_category'] = $this->tasks_model->get_task_kanban_category();
+		$data['filterBy'] = $filterBy;
         $data['subview'] = $this->load->view('admin/tasks/tasks', $data, TRUE);
+
         
         $this->load->view('admin/_layout_skote_main', $data);
         // $this->output->enable_profiler(TRUE);

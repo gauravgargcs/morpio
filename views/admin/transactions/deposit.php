@@ -278,7 +278,7 @@ if (!empty($deposit_info)) {
                         <h4 class="card-title mb-4"><?= lang('all_deposit') ?></h4>
        
                         <!-- <div class="table-responsive"> -->
-                            <table class="table table-striped dt-responsive nowrap w-100" id="manage_deposit_datatable">
+                            <table class="table table-striped dt-responsive nowrap w-100" id="contentTable">
                                 <thead>
                                 <tr>
                                     <?php super_admin_opt_th() ?>
@@ -304,7 +304,7 @@ if (!empty($deposit_info)) {
                                     <?php } ?>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <?php /* ?><tbody>
                                 <?php
                                 $curency = $this->transactions_model->check_by(array('code' => config_item('default_currency')), 'tbl_currencies');
                                 $total_amount = 0;
@@ -395,7 +395,7 @@ if (!empty($deposit_info)) {
                                 endif;
                                 ?>
 
-                                </tbody>
+                                </tbody><?php */ ?>
                             </table>
                         <!-- </div> -->
                     </div>
@@ -1053,3 +1053,35 @@ if (!empty($deposit_info)) {
        });
     });
 </script>
+
+<!-- Script -->
+ <script type="text/javascript">
+     $(document).ready(function(){
+        $('#contentTable').DataTable({
+          'processing': true,
+          'serverSide': true,
+          'serverMethod': 'post',
+          'ajax': {
+             'url':'<?=base_url()?>admin/datatable/deposit'
+          },
+          'fnRowCallback': function( nRow, aData, iDisplayIndex ) {
+            $(nRow).attr("id", "table_deposit_"+iDisplayIndex);
+            return nRow;
+          },
+          'columns': [
+		  <?php if (is_company_column_ag()) { ?>
+             { data: 'companies_id' },
+		  <?php } ?>
+             { data: 'name' },
+             { data: 'date' },
+             { data: 'account' },
+             { data: 'paid_by' },
+             { data: 'amount' },
+             { data: 'balance' },
+             { data: 'attachment' },
+             // { data: 'label' },
+             { data: 'action' },
+          ]
+        });
+     });
+ </script>

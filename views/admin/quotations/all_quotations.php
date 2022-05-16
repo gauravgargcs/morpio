@@ -17,7 +17,7 @@
             <div class="card-body">
                 <h4 class="card-title"><?= lang('quotations') ?></h4>
                 <div class="table-responsive">
-                    <table class="table table-striped dt-responsive nowrap w-100" id="list_quotations_datatable">
+                    <table class="table table-striped dt-responsive nowrap w-100" id="contentTable">
                         <thead>
                             <tr>
                                 <?php super_admin_opt_th() ?>
@@ -30,7 +30,7 @@
                                 <th><?= lang('action') ?></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <?php /* ?><tbody>
                         <?php
                         if (!empty($all_quatations)) {
 
@@ -88,10 +88,40 @@
                             }
                         }
                         ?>
-                        </tbody>
+                        </tbody><?php */ ?>
                     </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Script -->
+ <script type="text/javascript">
+     $(document).ready(function(){
+        $('#contentTable').DataTable({
+          'processing': true,
+          'serverSide': true,
+          'serverMethod': 'post',
+          'ajax': {
+             'url':'<?=base_url()?>admin/datatable/quotations'
+          },
+          'fnRowCallback': function( nRow, aData, iDisplayIndex ) {
+            $(nRow).attr("id", "table_deposit_"+iDisplayIndex);
+            return nRow;
+          },
+          'columns': [
+		  <?php if (is_company_column_ag()) { ?>
+             { data: 'companies_id' },
+		  <?php } ?>
+             { data: 'quotations_form_title' },
+             { data: 'name' },
+             { data: 'quotations_date' },
+             { data: 'quotations_amount' },
+             { data: 'quotations_status' },
+             { data: 'generated_by' },
+             { data: 'action' },
+          ]
+        });
+     });
+ </script>

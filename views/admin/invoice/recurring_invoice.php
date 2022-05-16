@@ -75,7 +75,7 @@ $saved_items = $this->invoice_model->get_all_items();
                         <h4 class="card-title mb-4 mt"><strong><?= lang('recurring_invoice') ?></strong></h4>
             
                         <div class="table-responsive">
-                            <table class="table table-striped dt-responsive nowrap w-100" id="list_invoice_datatable">
+                            <table class="table table-striped dt-responsive nowrap w-100" id="contentTable">
                                 <thead>
                                         <tr>
                                         <?php super_admin_opt_th() ?>
@@ -90,7 +90,7 @@ $saved_items = $this->invoice_model->get_all_items();
                                         <?php } ?>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <?php /* ?><tbody>
                                     <?php
                                     if (!empty($all_invoices_info)) {
                                     foreach ($all_invoices_info as $v_invoices) {
@@ -169,7 +169,7 @@ $saved_items = $this->invoice_model->get_all_items();
                                                 <?php } ?>
                                             </tr>
                                     <?php }  }  }   ?>
-                                </tbody>
+                                </tbody><?php */ ?>
                             </table>
                         </div>
                     </div>
@@ -998,3 +998,33 @@ if (isset($invoice_info)) {
     });
 </script>
 <?php include_once 'skote_assets/js/invoice.php'; ?>
+
+<!-- Script -->
+ <script type="text/javascript">
+     $(document).ready(function(){
+        $('#contentTable').DataTable({
+          'processing': true,
+          'serverSide': true,
+          'serverMethod': 'post',
+          'ajax': {
+             'url':'<?=base_url()?>admin/datatable/recurring_invoice'
+          },
+          'fnRowCallback': function( nRow, aData, iDisplayIndex ) {
+            $(nRow).attr("id", "table_recurr_"+iDisplayIndex);
+            return nRow;
+          },
+          'columns': [
+		  <?php if (is_company_column_ag()) { ?>
+             { data: 'companies_id' },
+		  <?php } ?>
+             { data: 'invoice' },
+             { data: 'due_date' },
+             { data: 'client_name' },
+             { data: 'amount' },
+             { data: 'due_amount' },
+             { data: 'status' },
+             { data: 'action' },
+          ]
+        });
+     });
+ </script>

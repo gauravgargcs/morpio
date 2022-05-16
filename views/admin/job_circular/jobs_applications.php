@@ -18,7 +18,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-4"><?= lang('job_application_list') ?></h4>
-                <table class="table table-striped dt-responsive nowrap w-100" id="job_app_dtable">
+                <table class="table table-striped dt-responsive nowrap w-100" id="contentTable">
                     <thead>
                     <tr>
                         <?php super_admin_opt_th() ?>
@@ -31,7 +31,7 @@
                         <th class="col-sm-2"><?= lang('action') ?></th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <?php /* ?><tbody>
                         <?php
 
                         if (!empty($job_application_info)): foreach ($job_application_info as $v_job_application):
@@ -78,9 +78,40 @@
                         endforeach;
                             ?>
                         <?php endif; ?>
-                    </tbody>
+                    </tbody><?php */ ?>
                 </table>
             </div>
         </div>
     </div>
 </div>
+
+
+<!-- Script -->
+ <script type="text/javascript">
+     $(document).ready(function(){
+        $('#contentTable').DataTable({
+          'processing': true,
+          'serverSide': true,
+          'serverMethod': 'post',
+          'ajax': {
+             'url':'<?=base_url()?>admin/datatable/jobs_applications'
+          },
+          'fnRowCallback': function( nRow, aData, iDisplayIndex ) {
+            $(nRow).attr("id", "table_deposit_"+iDisplayIndex);
+            return nRow;
+          },
+          'columns': [
+		  <?php if (is_company_column_ag()) { ?>
+             { data: 'companies_id' },
+		  <?php } ?>
+             { data: 'job_title' },
+             { data: 'name' },
+             { data: 'email' },
+             { data: 'mobile' },
+             { data: 'apply_on' },
+             { data: 'application_status' },
+             { data: 'action' },
+          ]
+        });
+     });
+ </script>

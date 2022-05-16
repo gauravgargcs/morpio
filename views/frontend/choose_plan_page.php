@@ -5480,8 +5480,14 @@ crm stands for customer relation management">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i|Tauri:400">
     <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i|Lato:100,100i,300,300i,400,400i,700,700i,900,900i|Archivo+Black:400">
     
-    
-    
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/frontend/signup/Home.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/frontend/signup/nicepage.css">
+    <style>
+	.u-section-1 .u-image-1 {
+  background-image: linear-gradient(0deg, rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url("<?php echo base_url(); ?>assets/frontend/signup/4c914ed6-b6fb-4a5d-b12b-712a90b5f7a9.jpg");
+  
+}
+	</style>
     <script type="application/ld+json">{
     "@context": "http://schema.org",
     "@type": "Organization",
@@ -5504,28 +5510,58 @@ crm stands for customer relation management">
   (function(g,u,i,d,e,s){g[e]=g[e]||[];var f=u.getElementsByTagName(i)[0];var k=u.createElement(i);k.async=true;k.src='https://static.userguiding.com/media/user-guiding-'+s+'-embedded.js';f.parentNode.insertBefore(k,f);if(g[d])return;var ug=g[d]={q:[]};ug.c=function(n){return function(){ug.q.push([n,arguments])};};var m=['previewGuide','finishPreview','track','identify','triggerNps','hideChecklist','launchChecklist'];for(var j=0;j<m.length;j+=1){ug[m[j]]=ug.c(m[j]);}})(window,document,'script','userGuiding','userGuidingLayer','342153174ID'); 
 </script>
 </head>
-  <body class="u-body">
-    <section class="u-align-center u-clearfix u-grey-5 u-section-1" id="carousel_beec">
-      <div class="u-clearfix u-expanded-width u-gutter-0 u-layout-wrap u-layout-wrap-1">
-        <div class="u-layout">
-          <div class="u-layout-row">
-            <div class="u-container-style u-layout-cell u-left-cell u-size-30 u-white u-layout-cell-1">
-              <div class="u-container-layout u-container-layout-1">
-                <h2 class="u-align-left u-custom-font u-font-pt-sans u-text u-text-1">WELCOME</h2>
-                <p class="u-align-left u-large-text u-text u-text-grey-50 u-text-variant u-text-2"> It's terrific that you've decided to join us.<br>
-                  <br>Paid members will be automatically enrolled in our founders plan, which means they will continue to receive discounted pricing and priority consideration in the event that the company decides to sell shares to the general public.
-                </p>
-                <div class="u-expanded-width u-form u-form-1">
-                
-                    <?php $default_url = preg_replace('#^https?://#', '', rtrim(config_item('default_url'), '/')); ?>
-                    <?php echo form_open(base_url('signed_up'), array('class' => 'u-clearfix u-form-custom-backend u-form-spacing-10 u-form-vertical u-inner-form', 'id' => 'contact-form', 'enctype' => 'multipart/form-data', 'data-parsley-validate' => '', 'role' => 'form')); ?>
-                    <input type="hidden" id="siteId" name="siteId" value="1211365" wfd-invisible="true">
-                    <input type="hidden" id="pageId" name="pageId" value="1211429" wfd-invisible="true">
-                    <div class="u-form-group u-form-select u-form-group-1">
-                      <label for="select-fd0f" class="u-form-control-hidden u-label u-label-1"></label>
-                      <div class="u-form-select-wrapper mb-2">
-                        <select id="select-fd0f" name="pricing_id" class="u-border-3 u-border-palette-4-light-2 u-input u-input-rectangle u-radius-6 u-white u-input-1">
-                          <?php 
+  <body class="u-body u-xl-mode">
+    <section class="u-clearfix u-white u-section-1" id="carousel_eabd">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-clearfix u-expanded-width u-gutter-12 u-layout-wrap u-layout-wrap-1">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-align-left u-container-style u-grey-5 u-layout-cell u-radius-3 u-shape-round u-size-38 u-layout-cell-1">
+                <div class="u-container-layout u-container-layout-1">
+                  <quillbot-extension></quillbot-extension>
+                  <quillbot-extension-highlights style="position: absolute; top: 0px; left: 0px; pointer-events: none;"></quillbot-extension-highlights>
+                  <h3 class="u-text u-text-1" style="    font-size: 1.875rem;">
+                    <span style="font-weight: 700;">100% free CRM, forever.</span>
+                    <br>
+                  </h3>
+                  <p class="u-custom-font u-heading-font u-text u-text-2"> The only platform for every stage of your business.&nbsp;A completely free CRM; only pay for add-ons as needed.</p>
+                  <div class="u-form u-form-1">
+				  <?php $default_url = preg_replace('#^https?://#', '', rtrim(config_item('default_url'), '/')); ?>
+                    <?php echo form_open(base_url('signed_up'), array('class' => 'u-clearfix u-form-custom-backend u-form-spacing-20 u-form-vertical u-inner-form', 'id' => 'contact-form', 'enctype' => 'multipart/form-data', 'data-parsley-validate' => '', 'role' => 'form')); ?>
+                    
+                    <input type="hidden" id="siteId" name="siteId" value="1868226">
+                      <input type="hidden" id="pageId" name="pageId" value="1868237">
+                      <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-none u-form-group-1">
+                        <label for="name-ea18" class="u-custom-font u-heading-font u-label u-label-1">Name</label>
+                        <input type="text" placeholder="Your Name" id="name-f0d0" name="name" class="u-custom-font u-heading-font u-input u-input-rectangle u-radius-6 u-text-grey-60 u-white u-input-1" required="">
+                      </div>
+					 
+                      <div class="u-form-email u-form-group u-form-partition-factor-2 u-label-none u-form-group-2">
+                        <label for="email-ea18" class="u-custom-font u-heading-font u-label u-label-2">Email</label>
+                        <input type="email" placeholder="Valid email address" id="check_email" name="email" class="u-custom-font u-heading-font u-input u-input-rectangle u-radius-6 u-text-grey-60 u-white u-input-2" required="">
+						<small class="text-danger" id="email_error"></small>
+					  </div>
+                      <div class="u-form-group u-form-partition-factor-2 u-form-phone u-label-none u-form-group-3">
+                        <label for="phone-046f" class="u-custom-font u-heading-font u-label u-label-3">Phone</label>
+                        <input type="tel" pattern="\+?\d{0,3}[\s\(\-]?([0-9]{2,3})[\s\)\-]?([\s\-]?)([0-9]{3})[\s\-]?([0-9]{2})[\s\-]?([0-9]{2})" placeholder="Enter your phone (e.g. +14155552675)" id="phone-046f" name="mobile" class="u-custom-font u-heading-font u-input u-input-rectangle u-radius-6 u-text-grey-60 u-white u-input-3" required="">
+                      </div>
+					  
+					  <div class="u-form-group u-form-partition-factor-2 u-label-none u-form-group-4">
+                        <label for="text-da22" class="u-custom-font u-heading-font u-label u-label-4">Input</label>
+                        <input type="text" placeholder="Choose a Domain Name" name="domain"
+                      id="domain" class="main_domain u-custom-font u-heading-font u-input u-input-rectangle u-radius-6 u-text-grey-60 u-white u-input-4" required="required">
+                      <small class="text-danger" id="new_error"></small>
+
+                      <!-- <span class="help-block domain_showed"
+                      style=""><?php //echo lang('example') ?>: <strong
+                      id="sub_domain" class="">https://yourbusiness.<?php //echo $default_url;?></strong></span>-->
+					  </div>
+                      
+                      <div class="u-form-group u-form-partition-factor-2 u-form-select u-label-none u-form-group-5">
+                        <label for="select-6d7e" class="u-custom-font u-heading-font u-label u-label-5">Select</label>
+                        <div class="u-form-select-wrapper">
+                          <select id="select-fd0f" name="pricing_id" class="u-custom-font u-heading-font u-input u-input-rectangle u-radius-6 u-text-grey-60 u-white u-input-5" required="required">
+                            <?php 
                               if (!empty($c_pricing_info)) {
                 foreach ($c_pricing_info as $key => $v_wise_price) {
                     if ($interval_type == 'annually') {
@@ -5539,129 +5575,62 @@ crm stands for customer relation management">
                 <?php }
             } ?>
                       
-                        </select>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
+                          </select>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
+                        </div>
                       </div>
-
-                      <div class="u-form-vertical ">
-                        <div class="u-form-partition-factor-2 pdr-5"> 
-                         <select id="interval_type" name="interval_type" class="u-border-3 u-border-palette-4-light-2 u-input u-input-rectangle u-radius-6 u-white u-input-1 set_price">
-                         
-                    <option value="monthly" <?= (!empty($interval_type) && $interval_type == 'monthly' ) ? 'selected' : '' ?>> Monthly </option>
+                      <div class="u-form-group u-form-partition-factor-2 u-form-select u-label-none u-form-group-6">
+                        <label for="select-b405" class="u-custom-font u-heading-font u-label u-label-6">Select</label>
+                        <div class="u-form-select-wrapper">
+                          <select id="interval_type" name="interval_type" class="u-custom-font u-heading-font u-input u-input-rectangle u-radius-6 u-text-grey-60 u-white u-input-6" required="required">
+                            <option value="monthly" <?= (!empty($interval_type) && $interval_type == 'monthly' ) ? 'selected' : '' ?>> Monthly </option>
                     <option value="annually" <?= (!empty($interval_type) && $interval_type == 'annually') ? 'selected' : '' ?>> Annually </option>
               
-                      
-                        </select></div>
-                        <div class="u-form-partition-factor-2">  <select id="currency_type" name="currency_type" class="u-border-3 u-border-palette-4-light-2 u-input u-input-rectangle u-radius-6 u-white u-input-1 set_price">
-                          <?php
-            $all_currency = $this->db->select('currency')->distinct()->get('tbl_currencywise_price')->result();
-            if (!empty($all_currency)) {
-                foreach ($all_currency as $v_currency) {
-                    $c_name = get_row('tbl_currencies', array('code' => $v_currency->currency));
-                    ?>
-                    <option
-                        value="<?= $v_currency->currency ?>" <?= (!empty($currency_type) && $currency_type == $v_currency->currency || (empty($currency_type) && $v_currency->currency == config_item('default_currency')) ? 'selected' : 'y') ?> ><?= $c_name->name . '(' . $c_name->symbol . ')' ?> </option>
-                <?php }
-            } ?>
-                      
-                        </select></div>
-                      </div>
-                    </div>
-                    <div class="u-form-group u-form-select u-form-group-2">
-                      <label for="select-3945" class="u-label u-label-2">Would you like information on an industry module?</label>
-                      <div class="u-form-select-wrapper">
-                        <select id="select-3945" name="industry_type" class="u-border-3 u-border-palette-4-light-2 u-input u-input-rectangle u-radius-6 u-white u-input-2">
-                          <option value="">Industry Options</option>
-                          <?php if($industries = get_industries()){
-                            foreach ($industries as $key => $industry_name) {
-                                ?>
-                                   <option value="<?=$industry_name;?>"><?=$industry_name;?></option>
-                                <?php
-                            }
-                          } ?>
-                       
-                        </select>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
-                      </div>
-                    </div>
-                    <div class="u-form-group u-form-name">
-                      <label for="name-f0d0" class="u-form-control-hidden u-label u-label-3" wfd-invisible="true">Name</label>
-                      <input type="text" placeholder="Name" id="name-f0d0" name="name" class="u-border-3 u-border-palette-4-light-2 u-input u-input-rectangle u-radius-6 u-white u-input-3" required="">
-                    </div>
-                    <div class="u-form-group u-form-name u-form-group-4">
-                      <label for="name-3c4e" class="u-form-control-hidden u-label u-label-4" wfd-invisible="true">Name</label>
-                      <input type="text" placeholder="Company " id="company" name="company_name" class="u-border-3 u-border-palette-4-light-2 u-input u-input-rectangle u-radius-6 u-white u-input-4" required="">
-                    </div>
-                    <div class="u-form-group u-form-phone u-form-group-5">
-                      <label for="phone-fbbe" class="u-form-control-hidden u-label u-label-5" wfd-invisible="true">Phone</label>
-                      <input type="tel" pattern="\+?\d{0,3}[\s\(\-]?([0-9]{2,3})[\s\)\-]?([\s\-]?)([0-9]{3})[\s\-]?([0-9]{2})[\s\-]?([0-9]{2})" placeholder="Phone" id="phone-fbbe" name="mobile" class="u-border-3 u-border-palette-4-light-2 u-input u-input-rectangle u-radius-6 u-white u-input-5" required="">
-                    </div>
-                    <div class="u-form-email u-form-group">
-                      <label for="email-f0d0" class="u-form-control-hidden u-label u-label-6" wfd-invisible="true">Email</label>
-                      <input type="email" placeholder="email" id="check_email"  name="email" class="u-border-3 u-border-palette-4-light-2 u-input u-input-rectangle u-radius-6 u-white u-input-6" required="">
-                       <small class="text-danger" id="email_error"></small>
-                    </div>
-                    <div class="u-form-address u-form-group u-form-group-7">
-                      <label for="address-e9ab" class="u-form-control-hidden u-label u-label-7"></label>
                      
-                       <select id="country" name="country" class="u-border-3 u-border-palette-4-light-2 u-input u-input-rectangle u-radius-6 u-white u-input-2">
-                         <optgroup label="Default Country">
-                                            <option
-                                                    value="<?= $this->config->item('company_country') ?>"><?= $this->config->item('company_country') ?></option>
-                                        </optgroup>
-                                        <optgroup label="<?= lang('other_countries') ?>">
-                                            <?php if (!empty($countries)): foreach ($countries as $country): ?>
-                                                <option
-                                                        value="<?= $country->value ?>" <?= (!empty($company_info->country) && $company_info->country == $country->value ? 'selected' : NULL) ?>><?= $country->value ?>
-                                                </option>
-                                            <?php
-                                            endforeach;
-                                            endif;
-                                            ?>
-                                        </optgroup>
-                         
-                        </select>
-                    </div>
-                    <div class="u-form-group u-form-group-8">
-                      <label for="text-3c0a" class="u-label u-label-8">Choose Your Domain Name</label>
-                      <input type="text"  name="domain"
-                      id="domain"  class="main_domain u-border-3 u-border-palette-4-light-2 u-input u-input-rectangle u-radius-6 u-white u-input-8" placeholder="EG. yourbusiness.merpio.com" required="required">
-                      <small class="text-danger" id="new_error"></small>
-
-                      <span class="help-block domain_showed"
-                      style=""><?= lang('example') ?>: <strong
-                      id="sub_domain" class="">https://yourbusiness.<?=$default_url;?></strong></span>
-                  
-                    
-                    </div>
-                    <div class="u-form-checkbox u-form-group u-form-group-9">
-                      <input type="checkbox" id="checkbox-eec9" name="funder_program" value="1">
-                      <label for="checkbox-eec9" class="u-label u-label-9">Include me in the Founders Program (Free)</label>
-                    </div>
-                    <div class="u-align-center u-form-group u-form-submit">
-                    
-                      <input type="submit" value="GET STARTED" id="new_company" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-10 u-radius-7 u-btn-1" wfd-invisible="true">
-                    </div>
-                    <div class="u-form-send-message u-form-send-success" wfd-invisible="true"> Thank you! Your message has been sent. </div>
-                    <div class="u-form-send-error u-form-send-message" wfd-invisible="true"> Unable to send your message. Please fix errors then try again. </div>
-                    <input type="hidden" value="" name="recaptchaResponse" wfd-invisible="true">
-                  </form>
+                          </select>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
+                        </div>
+                      </div>
+					  
+					  
+					
+					
+					  
+					  <!-- <div class="u-form-checkbox u-form-group u-form-group-9">
+						  <input type="checkbox" id="checkbox-eec9" name="funder_program" value="1">
+						  <label for="checkbox-eec9" class="u-label u-label-9">Include me in the Founders Program (Free)</label>
+						</div> -->
+						<div class="u-align-left u-form-group u-form-submit">
+						
+						  <input type="submit" style="padding: 10px 55px;font-size: 16px;" value="Next" id="new_company" class="u-btn u-btn-round u-btn-submit u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-radius-5 u-btn-1" wfd-invisible="true">
+						</div>
+						<div class="u-form-send-message u-form-send-success" wfd-invisible="true"> Thank you! Your message has been sent. </div>
+						<div class="u-form-send-error u-form-send-message" wfd-invisible="true"> Unable to send your message. Please fix errors then try again. </div>
+						<input type="hidden" value="" name="recaptchaResponse" wfd-invisible="true">
+						
+                      <!--<div class="u-align-left u-form-group u-form-submit u-label-none u-form-group-7">
+                        <a href="#" class="u-btn u-btn-round u-btn-submit u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-radius-5 u-btn-1">next</a>
+                        <input type="submit" value="submit" class="u-form-control-hidden">
+                      </div>
+                      <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
+                      <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors then try again. </div>
+                      <input type="hidden" value="" name="recaptchaResponse">-->
+                    </form>
+                  </div>
+                  <p class="u-custom-font u-heading-font u-text u-text-3">No card details required</p>
+                  <p class="u-text u-text-7">
+                    <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-custom-font u-heading-font u-hover-none u-none u-text-palette-1-base u-btn-2" href="https://merpio.com.au/privacy-policy"> We care about your privacy.&nbsp;Check out our Privacy Policy for more information.</a>
+                  </p>
+                  <h6 class="u-text u-text-5">
+                    <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-3" href="www.merpio.com" target="_blank"></a>Have an account?&nbsp;<a href="<?=base_url('login');?>" class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-4" target="_blank">Sign in</a>.
+                  </h6>
                 </div>
-                <p class="u-align-center u-text u-text-3"> Already have an account?&nbsp;&nbsp;<a href="<?=base_url('login');?>" class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-2" target="_blank">Sign in now</a>
-                </p>
               </div>
-            </div>
-            <div class="u-align-left u-container-style u-image u-layout-cell u-right-cell u-shading u-size-30 u-image-1" data-image-width="1280" data-image-height="853">
-              <div class="u-container-layout u-container-layout-2">
-                <h4 class="u-text u-text-4">Prefer to have your account setup for you?</h4>
-                <h5 class="u-text u-text-grey-60 u-text-5">
-                  <span class="u-text-white"> Allow us to perform the initial setup for free. Simply fill out the form linked here, and we'll take care of the rest.<br>
-                    
-                  </span>
-                  <br>
-                  <br>
-                </h5>
-                <a href="https://merpio.com.au/merpio-setup" class="u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-base u-palette-2-base u-radius-6 u-btn-3">ACCOUNT SETUP </a>
+              <div class="u-container-style u-image u-image-round u-layout-cell u-radius-7 u-shading u-shape-rectangle u-size-22 u-image-1" data-image-width="1637" data-image-height="1080" data-animation-name="" data-animation-duration="0" data-animation-direction="">
+                <div class="u-container-layout u-container-layout-2">
+                  <quillbot-extension style="margin-bottom: 0px;"></quillbot-extension>
+                  <quillbot-extension-highlights style="position: absolute; top: 0px; left: 0px; pointer-events: none;"></quillbot-extension-highlights>
+                </div>
               </div>
             </div>
           </div>
