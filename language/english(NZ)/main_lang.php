@@ -1,0 +1,92 @@
+<?php
+$lang['table-strings_length'] = '10';
+$lang['expense_category_used'] = '';
+$lang['_path'] = './application/';
+$lang['2checkout'] = '2Checkout';
+$lang['message_new_email_sent'] = 'A confirmation email has been sent to ! Follow the instructions in the email to complete this change of email address.';
+$lang['message_new_password_confi'] = 'A confirmation email has been sent to! Follow the instructions in the email to complete this change of password.';
+$lang['message_activation_email_sent'] = 'A new activation email has been sent to! Follow the instructions in the email to activate your account.';
+$lang['accepted'] = 'Accepted';
+$lang['access_denied'] = 'Access denied';
+
+$lang['account_details'] = 'Account Details1';
+$lang['account_emails'] = 'Account Emails';
+
+$lang['try_now'] = 'Try Now';
+$lang['get_in_touch'] = 'Get in Touch';
+$lang['pricing'] = 'PRICING';
+$lang['our_best_features'] = 'Features at a Glance';
+$lang['_path'] = './application/';
+$lang['Mega_Menu'] = 'Mega Menu';
+$lang['Menu'] = 'Menu';
+$lang['welcome_back'] = 'Welcome Back !';
+$lang['in_process'] = 'In Process';
+$lang['income'] = 'Income';
+$lang['Video_Meetings'] = 'Video Meetings';
+$lang['Document_Management'] = 'Document Management';
+$lang['Email_Campaigns'] = 'Email Campaigns';
+$lang['Proposal_Software'] = 'Proposal Software';
+$lang['Social_Media_Campaigns'] = 'Social Media Campaigns';
+$lang['Website_Builder'] = 'Website Builder';
+$lang['updated_successfully'] = 'Update successfully.';
+$lang['Edit'] = 'Edit';
+$lang['Delete'] = 'Delete';
+$lang['AddNew'] = 'Add New';
+$lang['new_tasks'] = 'Add New Task';
+$lang['import'] = 'Import';
+$lang['View_More'] = 'View More';
+$lang['are_you_sure'] = 'Are you sure?';
+$lang['Yes_delete_it'] = 'Yes, delete it!';
+$lang['deleted'] = 'Deleted!';
+$lang['data_deleted'] = 'Your data has been deleted.';
+$lang['send_token_activation_email_success'] = 'Activation token send successfully.';
+$lang['Meeting_Event'] = 'Meeting / Event';
+$lang['Video_Meeting'] = 'Video Meeting';
+$lang['Phone_Meeting'] = 'Phone Meeting';
+$lang['Appointment_slots'] = 'Appointment Slots';
+$lang['calendar_external_events'] = 'Drag and drop your event or click in the calendar';
+$lang['Create_New_Event'] = 'Create New Event';
+$lang['event'] = 'Event';
+$lang['event_name_error'] = 'Please provide a valid event name';
+$lang['event_cat_error'] = 'Please select a valid event category';
+$lang['event_start_date_error'] = 'Please select a valid event start date';
+$lang['event_end_date_error'] = 'Please select a valid event end date';
+$lang['new_lead'] = 'New Lead';
+$lang['new_todo'] = 'New Todo';
+$lang['new_task'] = 'New Task';
+$lang['new_calendar_event'] = 'New Calendar event';
+$lang['Merpio_video_meet'] = 'Merpio Video Meet';
+$lang['google_meeting'] = 'Google Meeting';
+$lang['kanban_category']='Task Category List';
+$lang['order_no']='Order no.';
+$lang['category_information_updated']='Task category information updated!';
+$lang['category_information_deleted']='Task category information deleted!';
+$lang['cannot_delete_category_information']='Can not delete main task category information!';
+$lang['are_you_sure_want_to_update_status_for_selected_leads'] = 'Are you sure you want to update status for selected leads?';
+$lang['project_in_progress'] = 'In Progress';
+$lang['ALL_PERMISSION_WARNING_MSG'] = 'It will give access to all users!';
+$lang['assigned_users_list'] = 'Assigned Usernames';
+$lang['cannot_update_category_information'] = 'Can not update Completed task list';
+$lang['move_tasks_first_to_delete_list'] = 'Please move all tasks from this list to delete this list!';
+$lang['activate_database'] = 'Activate Database';
+$lang['docroom'] = 'Doc room';
+$lang['all_folders'] = 'All Folders';
+$lang['docroom_settings'] = 'Docroom Settings';
+$lang['api_key1']='API Key 1';
+$lang['api_key2']='API Key 2';
+$lang['docroom_connect_msg']='Oops, please connect your doc room to enable data storage and uploads! <a href="'.$docroom_settings_link.'" class="alert-link">Click here</a>';
+$lang['user_docroom_integration']='Docroom Integration successful!';
+$lang['create_new'] = 'Create new';
+$lang['folder'] = 'Folder';
+$lang['my_documents'] = 'My Documents';
+$lang['folder_created_successfully'] = 'Folder created successfully!';
+$lang['folder_empty'] = 'This folder is empty!';
+$lang['change_source'] = 'Change Source';
+$lang['assign_to_you_the_client'] = 'Assigned to you a client - %s';
+$lang['update_client'] = 'Update Client information successfully';
+$lang['not_update_client'] = 'Client updated - %s';
+
+
+
+/* End of file main_lang.php */
+/* Location: ./application/language/english(NZ)/main_lang.php */

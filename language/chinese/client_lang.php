@@ -1,0 +1,59 @@
+<?php
+$lang['client_list'] = '客户列表';
+$lang['all_client'] = '所有客户';
+$lang['name'] = '姓名';
+$lang['client'] = '客户';
+$lang['clients'] = '客户们';
+$lang['client_status'] = '选择类型';
+$lang['select'] = '选择';
+$lang['manage_client'] = '管理客户';
+$lang['clients_registration'] = '客户注册';
+$lang['clients_registered'] = '客户注册';
+$lang['client_registered_successfully'] = '客户注册成功！';
+$lang['activity_added_new_company'] = '添加新客户';
+$lang['activity_update_company'] = '新客户更新';
+$lang['activity_update_contact'] = '新联系人更新';
+$lang['activity_added_new_contact'] = '添加新联系人';
+$lang['activity_deleted_contact'] = '删除联系人';
+$lang['delete_contact'] = '客户联系信息已删除完成！';
+$lang['activity_deleted_client'] = '删除客户';
+$lang['delete_client'] = '客户信息删除完成！';
+$lang['select_type'] = '选择类型';
+$lang['client_contact'] = '联系方式';
+$lang['hosting'] = '托管';
+$lang['converted_from'] = '转换表格';
+$lang['without_converted'] = '未转换';
+$lang['converted_client'] = '转换客户';
+$lang['business'] = '业务';
+$lang['state'] = '省/市';
+$lang['first_name'] = '名';
+$lang['last_name'] = '姓';
+$lang['toll_free'] = '免费电话';
+$lang['postal'] = '邮政编码';
+$lang['latitude'] = '纬度';
+$lang['longitude'] = '经度';
+$lang['google_map'] = '谷歌地图';
+$lang['fetch_from_google'] = '从谷歌获取';
+$lang['customer_fetch_lat_lng_usage'] = '请输入填写地址、城市和国家以获得最佳效果。';
+$lang['g_search_address_not_found'] = '无法找到地址，请再试一次';
+$lang['group'] = '集团';
+$lang['filter_by'] = '筛选自     ';
+$lang['update_client_status'] = '客户状态更新';
+$lang['save_and_create_contact'] = '保存并创建联系人';
+$lang['map'] = '地图';
+$lang['map_notice'] = '在客户端配置文件中添加经度和纬度以显示此处的地图';
+$lang['setup_google_api_key_map'] = '设置谷歌api键以查看客户端映射';
+$lang['google_api_key'] = '谷歌API钥匙';
+$lang['added_by'] = '添加自';
+$lang['activity_deleted_notes'] = '删除记录';
+$lang['zip_invoice'] = '邮政编码的发票';
+$lang['zip_proposal'] = '邮政编码的建议书';
+$lang['zip_estimate'] = '邮政编码的预估单';
+$lang['zip_payment'] = '邮政编码的付款单';
+$lang['from_date'] = '开始日期';
+$lang['to_date'] = '到目前为止';
+$lang['undefined_client'] = '未定义的客户';
+
+
+/* End of file client_lang.php */
+/* Location: ./application/language/chinese/client_lang.php */

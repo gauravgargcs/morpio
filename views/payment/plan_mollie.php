@@ -1,0 +1,43 @@
+<?php
+
+$attributes = array('class' => 'form-horizontal', 'data-parsley-validate' => "", 'novalidate' => "",);
+echo form_open(base_url() . 'payment/mollie/pay/payPlan/' . $plan_info->id . '/' . $sub_info->subscriptions_id, $attributes); ?>
+<div class="panel panel-custom">
+    <div class="panel-heading">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                class="sr-only">Close</span></button>
+        <h4 class="modal-title">Paying
+            <strong><?= display_money($invoice_info['amount'], $invoice_info['currency']); ?></strong> for
+            #<?= $invoice_info['item_name'] ?> via Mollie</h4>
+    </div>
+    <div class="modal-body">
+        <?php
+        // Show PHP errors, if they exist:
+        if (isset($errors) && !empty($errors) && is_array($errors)) {
+            echo '<div class="alert alert-error"><h4>Error!</h4>The following error(s) occurred:<ul>';
+            foreach ($errors as $e) {
+                echo "<li>$e</li>";
+            }
+            echo '</ul></div>';
+        }
+        ?>
+
+        <div id="payment-errors"></div>
+        <input type="hidden" name="id" value="<?= $invoice_info['item_number'] ?>">
+        <input name="amount" value="<?= display_money($invoice_info['amount']) ?>" type="hidden">
+        <div class="form-group">
+            <label class="col-lg-4 control-label"><?= lang('amount') ?> ( <?= $invoice_info['currency'] ?>) </label>
+            <div class="col-lg-4">
+
+                <input type="text" class="form-control" value="<?= display_money($invoice_info['amount']) ?>"
+                       readonly>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn btn-default" data-dismiss="modal"><?= lang('close') ?></a>
+        <input type="submit" value="Procced Payment" class="btn btn-success"/>
+    </div>
+</div>
+<?php echo form_close(); ?>
+
