@@ -1227,5 +1227,82 @@ class Frontend extends MY_Controller
             }
         }
     }
+	
+	public function check_login_link(){
+		
+		$data = array();
+		if( isset( $_POST['check_link_action'] ) && $_POST['check_link_action'] == 'check_link'){
+			
+			$this->db->select('*');
+			$this->db->from('tbl_subscriptions');
+			$this->db->where('email', $_POST['email']);
+			$query_result_ = $this->db->get();
+			$result_ = $query_result_->result();
 
+			if( !empty( $result_ ) ){
+				if( count($result_) == 1){
+					$link = 'https://'.$result_[0]->domain.'.allbizsales.net.au';
+					redirect($link);
+				}
+				else{
+					$links = array();
+					if( !empty($result_)){
+						foreach($result_ as $sub){
+							$links[] = 'https://'.$sub->domain.'.allbizsales.net.au';
+						}
+					}
+					$data['links'] = $links;
+					$this->load->view('frontend/links_found', $data); return;
+				}
+			}else{
+				redirect(base_url('check-again'));
+			}
+		}
+		
+		$this->load->view('frontend/check_login_link', $data);
+	}
+	
+	public function check_again(){
+		$data = array();
+		if( isset( $_POST['check_link_action'] ) && $_POST['check_link_action'] == 'check_link'){
+			
+			$this->db->select('*');
+			$this->db->from('tbl_subscriptions');
+			$this->db->where('email', $_POST['email']);
+			$query_result_ = $this->db->get();
+			$result_ = $query_result_->result();
+
+			if( !empty( $result_ ) ){
+				if( count($result_) == 1){
+					$link = 'https://'.$result_[0]->domain.'.allbizsales.net.au';
+					redirect($link);
+				}
+				else{
+					$links = array();
+					if( !empty($result_)){
+						foreach($result_ as $sub){
+							$links[] = 'https://'.$sub->domain.'.allbizsales.net.au';
+						}
+					}
+					$data['links'] = $links;
+					$this->load->view('frontend/links_found', $data); return;
+				}
+			}else{
+				redirect(base_url('check-again'));
+			}
+		}
+		$this->load->view('frontend/check_again', $data);
+	}
+	
+	public function links_found( $links ){
+		if( !empty($links)){
+			$data = array();
+			$data['links'] = $links;
+			$this->load->view('frontend/links_found', $data);
+		}
+		else{
+			redirect(base_url('check-login-link'));
+		}
+		
+	}
 }
