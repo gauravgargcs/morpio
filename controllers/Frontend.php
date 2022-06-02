@@ -1233,11 +1233,11 @@ class Frontend extends MY_Controller
 		$data = array();
 		if( isset( $_POST['check_link_action'] ) && $_POST['check_link_action'] == 'check_link'){
 			
-			$this->db->select('*');
-			$this->db->from('tbl_subscriptions');
-			$this->db->where('email', $_POST['email']);
-			$query_result_ = $this->db->get();
-			$result_ = $query_result_->result();
+			//$this->db->select('*');
+			//$this->db->from('tbl_subscriptions');
+			//$this->db->where('email', $_POST['email']);
+			//$query_result_ = $this->db->get();
+			$result_ = $this->findDomains__($_POST['email']);
 
 			if( !empty( $result_ ) ){
 				if( count($result_) == 1){
@@ -1266,12 +1266,11 @@ class Frontend extends MY_Controller
 		$data = array();
 		if( isset( $_POST['check_link_action'] ) && $_POST['check_link_action'] == 'check_link'){
 			
-			$this->db->select('*');
-			$this->db->from('tbl_subscriptions');
-			$this->db->where('email', $_POST['email']);
-			$query_result_ = $this->db->get();
-			$result_ = $query_result_->result();
-
+			//$this->db->select('*');
+			//$this->db->from('tbl_subscriptions');
+			//$this->db->where('email', $_POST['email']);
+			//$query_result_ = $this->db->get();
+			$result_ = $this->findDomains__($_POST['email']);
 			if( !empty( $result_ ) ){
 				if( count($result_) == 1){
 					$link = 'https://'.$result_[0]->domain.'.allbizsales.net.au';
@@ -1305,4 +1304,46 @@ class Frontend extends MY_Controller
 		}
 		
 	}
+	
+	
+	public function findDomains__($email)
+    {
+        //to get all subscription list
+         $find_domains = array();
+         $subscriptions = get_result('tbl_subscriptions');
+   
+         foreach ($subscriptions as $key => $subscription) {
+            //Connect subscriber database 
+             $this->new_db = new_database($subscription);
+             if(!$this->new_db ){
+                continue;
+             }
+			 if($subscription->email!=$email){
+			$this->new_db->select('*');
+			$this->new_db->from('tbl_users');
+			$this->new_db->where('email', $email);
+			$query_result_ = $this->new_db->get();
+			$result_ = $query_result_->result();
+		
+            if(!empty( $result_)){
+                  $result[] = $subscription;
+				  $find_domains = array_merge($find_domains, $result);          
+			 }
+			 }
+		 }
+         //This is for main db 
+        $this->old_db = new_database(true, true);
+		$this->old_db->select('*');
+		$this->old_db->from('tbl_subscriptions');
+		$this->old_db->where('email', $email);
+		$query_result__ = $this->old_db->get();
+		$result__ = $query_result__->result();
+		if(!empty( $result__ )){
+	
+		    $find_domains = array_merge($find_domains, $result__);     
+		  //  print_r($result__); die;
+		 }
+		
+		return $find_domains;
+    }
 }
