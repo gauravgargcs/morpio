@@ -1227,86 +1227,88 @@ class Frontend extends MY_Controller
             }
         }
     }
-	
-	public function check_login_link(){
-		
-		$data = array();
-		if( isset( $_POST['check_link_action'] ) && $_POST['check_link_action'] == 'check_link'){
-			
-			//$this->db->select('*');
-			//$this->db->from('tbl_subscriptions');
-			//$this->db->where('email', $_POST['email']);
-			//$query_result_ = $this->db->get();
-			$result_ = $this->findDomains__($_POST['email']);
-
-			if( !empty( $result_ ) ){
-				if( count($result_) == 1){
-					$link = 'https://'.$result_[0]->domain.'.allbizsales.net.au';
-					redirect($link);
-				}
-				else{
-					$links = array();
-					if( !empty($result_)){
-						foreach($result_ as $sub){
-							$links[] = 'https://'.$sub->domain.'.allbizsales.net.au';
-						}
-					}
-					$data['links'] = $links;
-					$this->load->view('frontend/links_found', $data); return;
-				}
-			}else{
-				redirect(base_url('check-again'));
-			}
-		}
-		
-		$this->load->view('frontend/check_login_link', $data);
-	}
-	
-	public function check_again(){
-		$data = array();
-		if( isset( $_POST['check_link_action'] ) && $_POST['check_link_action'] == 'check_link'){
-			
-			//$this->db->select('*');
-			//$this->db->from('tbl_subscriptions');
-			//$this->db->where('email', $_POST['email']);
-			//$query_result_ = $this->db->get();
-			$result_ = $this->findDomains__($_POST['email']);
-			if( !empty( $result_ ) ){
-				if( count($result_) == 1){
-					$link = 'https://'.$result_[0]->domain.'.allbizsales.net.au';
-					redirect($link);
-				}
-				else{
-					$links = array();
-					if( !empty($result_)){
-						foreach($result_ as $sub){
-							$links[] = 'https://'.$sub->domain.'.allbizsales.net.au';
-						}
-					}
-					$data['links'] = $links;
-					$this->load->view('frontend/links_found', $data); return;
-				}
-			}else{
-				redirect(base_url('check-again'));
-			}
-		}
-		$this->load->view('frontend/check_again', $data);
-	}
-	
-	public function links_found( $links ){
-		if( !empty($links)){
-			$data = array();
-			$data['links'] = $links;
-			$this->load->view('frontend/links_found', $data);
-		}
-		else{
-			redirect(base_url('check-login-link'));
-		}
-		
-	}
-	
-	
-	public function findDomains__($email)
+    
+    public function check_login_link(){
+        $data = array();
+        if( isset( $_POST['check_link_action'] ) && $_POST['check_link_action'] == 'check_link'){
+                $links = array();
+            $this->db->select('*');
+            $this->db->from('tbl_users');
+            $this->db->where('email', $_POST['email']);
+            $query_result_ = $this->db->get();
+            $result_ = $query_result_->result();
+             if(!empty( $result_)){
+                    $links[] = 'https://allbizsales.net.au';
+             }
+            $result_ = $this->findDomains__($_POST['email']);
+                    if( !empty($result_)){
+                        foreach($result_ as $sub){
+                            $links[] = 'https://'.$sub->domain.'.allbizsales.net.au';
+                        }
+                    }
+            if( !empty( $links ) ){
+                if( count($links) == 1){
+                    redirect($links[0]);
+                }
+                else{
+                    $data['links'] = $links;
+                    $this->load->view('frontend/links_found', $data); return;
+                }
+            }else{
+                redirect(base_url('check-again'));
+            }
+        }
+        
+        $this->load->view('frontend/check_login_link', $data);
+    }
+    
+    public function check_again(){
+        $data = array();
+        if( isset( $_POST['check_link_action'] ) && $_POST['check_link_action'] == 'check_link'){
+                $links = array();
+            $this->db->select('*');
+            $this->db->from('tbl_users');
+            $this->db->where('email', $_POST['email']);
+            $query_result_ = $this->db->get();
+            $result_ = $query_result_->result();
+             if(!empty( $result_)){
+                    $links[] = 'https://allbizsales.net.au';
+             }
+            $result_ = $this->findDomains__($_POST['email']);
+                    if( !empty($result_)){
+                        foreach($result_ as $sub){
+                            $links[] = 'https://'.$sub->domain.'.allbizsales.net.au';
+                        }
+                    }
+            if( !empty( $links ) ){
+                if( count($links) == 1){
+                    redirect($links[0]);
+                }
+                else{
+                    $data['links'] = $links;
+                    $this->load->view('frontend/links_found', $data); return;
+                }
+            }else{
+                redirect(base_url('check-again'));
+            }
+        }
+        $this->load->view('frontend/check_again', $data);
+    }
+    
+    public function links_found( $links ){
+        if( !empty($links)){
+            $data = array();
+            $data['links'] = $links;
+            $this->load->view('frontend/links_found', $data);
+        }
+        else{
+            redirect(base_url('check-login-link'));
+        }
+        
+    }
+    
+    
+    public function findDomains__($email)
     {
         //to get all subscription list
          $find_domains = array();
@@ -1318,32 +1320,20 @@ class Frontend extends MY_Controller
              if(!$this->new_db ){
                 continue;
              }
-			 if($subscription->email!=$email){
-			$this->new_db->select('*');
-			$this->new_db->from('tbl_users');
-			$this->new_db->where('email', $email);
-			$query_result_ = $this->new_db->get();
-			$result_ = $query_result_->result();
-		
+        //   if($subscription->email!=$email){
+            $this->new_db->select('*');
+            $this->new_db->from('tbl_users');
+            $this->new_db->where('email', $email);
+            $query_result_ = $this->new_db->get();
+            $result_ = $query_result_->result();
+        
             if(!empty( $result_)){
                   $result[] = $subscription;
-				  $find_domains = array_merge($find_domains, $result);          
-			 }
-			 }
-		 }
-         //This is for main db 
-        $this->old_db = new_database(true, true);
-		$this->old_db->select('*');
-		$this->old_db->from('tbl_subscriptions');
-		$this->old_db->where('email', $email);
-		$query_result__ = $this->old_db->get();
-		$result__ = $query_result__->result();
-		if(!empty( $result__ )){
-	
-		    $find_domains = array_merge($find_domains, $result__);     
-		  //  print_r($result__); die;
-		 }
-		
-		return $find_domains;
+                  $find_domains = array_merge($find_domains, $result);          
+             }
+    //       }
+         }
+        
+        return $find_domains;
     }
 }
